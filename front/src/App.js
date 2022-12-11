@@ -1,6 +1,8 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/home/home"
+import Podcast from "./components/details/podcast/podcast"
+import Chapter from "./components/details/chapter/chapter"
 
 function App() {
   return (
@@ -8,6 +10,8 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element= {<Home/>} />
+          <Route path="/detailPodcast/:collectionId" element= {<Podcast/>} />
+          <Route path="/detailChapter" element= {<Chapter/>} />
         </Routes>
       </div>
     </BrowserRouter>

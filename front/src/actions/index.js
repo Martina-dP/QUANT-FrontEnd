@@ -1,36 +1,37 @@
 import axios from "axios";
 
-export const GET_ITEM = "GET_ITEM"
-export const GET_DETAILS = "GET_DETAILS"
-export const POST_ITEM = "POST_ITEM"
+export const GET_PODCAST = "GET_PODCAST"
+export const GET_DETAILS_PODCAST = "GET_DETAILS_PODCAST"
+export const GET_DETAILS_CHAPTER = "GET_DETAILS_CHAPTER"
 
-// const URL_BASE = "http://front-test-api.herokuapp.com/api"
+const URL_BASE = "https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json"
+const URL_DETAILS = `https://itunes.apple.com/lookup?id=`
 
-export function getItems () {
+export function getPodcast () {
     return async function(dispatch){
-        var json = await axios.get(`/product`)
+        var json = await axios.get(`${URL_BASE}`)
         return dispatch({
-            type : "GET_ITEM",
-            payload : json.data
+            type : "GET_PODCAST",
+            payload : json.data.feed.entry
         })
     }
 }
 
-export function getDetails (id) {
+export function getDetailsPodcast (collectionId) {
     return async function(dispatch){
-        var json = await axios.get(`/product/${id}`)
+        var json = await axios.get(`https://itunes.apple.com/lookup?id=${collectionId}`)
         return dispatch({
-            type : "GET_DETAILS",
-            payload : json.data
+            type : "GET_DETAILS_PODCAST",
+            payload : json.data.results
         })
     }
 }
 
-export function postItem () {
+export function getDetailsChapter (podcastId, episodeId) {
     return async function(dispatch){
-        var json = await axios.get(`/cart`)
+        var json = await axios.get(`https://itunes.apple.com/lookup?id=${podcastId}/episode/${episodeId} `)
         return dispatch({
-            type : "POST_ITEM",
+            type : "GET_DETAILS_CHAPTER",
             payload : json.data
         })
     }

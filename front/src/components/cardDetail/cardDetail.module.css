@@ -1,0 +1,27 @@
+.all{
+    width: 16rem;
+    height: 26rem;
+    background-color: white;
+    margin: 1rem;
+    box-shadow: 0 2px 6px 2px rgb(197, 196, 196);
+}
+
+.img{
+    width: 9rem;
+    height: 9rem;
+    display: flex;
+    justify-content: center;
+}
+
+.text1{
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.text2{
+    font-size: 20px;
+}
+
+.text3{
+    font-size: 14px;
+}

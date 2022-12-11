@@ -4,9 +4,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {  Provider  } from "react-redux";
 import store from "./store/index";
-import axios from "axios";
-
-axios.defaults.baseURL = "http://front-test-api.herokuapp.com/api"
 
 createRoot(
   document.getElementById('root')

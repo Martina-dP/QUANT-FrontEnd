@@ -1,0 +1,12 @@
+.all{
+    height: 4rem;
+    background-color: white;
+    margin: 1rem;
+    box-shadow: 0 2px 6px 2px rgb(197, 196, 196);
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    padding-top: .6rem;
+}
