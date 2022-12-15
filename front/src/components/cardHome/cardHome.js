@@ -8,10 +8,10 @@ function CardPodcast({artist, name, image, collectionId}){
         <div className={style.all}>
             <div className={style.all2}>
                 <Link to={`/detailPodcast/${collectionId}`} >
-                    <img src={image} alt="img not found" />
+                    <img className={style.img} src={image} alt="img not found" />
                 </Link>
                 <h2 className={style.title}>{name}</h2>
-                <h2 className={style.title}>{artist}</h2>
+                <h2 className={style.title2}>{artist}</h2>
             </div>
         </div>
     )} 

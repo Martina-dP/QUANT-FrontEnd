@@ -1,14 +1,16 @@
 import { 
   GET_PODCAST,
   GET_DETAILS_PODCAST,
-  GET_DETAILS_CHAPTER 
+  GET_DETAILS_CHAPTER,
+  GET_LIST
 } from "../actions/index"
 
 const initialState = {
   podcast: [],
-  allPodcast: [],
   detailPodscast: {},
   detailChapter: {},
+  data:{},
+  listChapters: []
   };
 
 function rootReducer (state = initialState, { type, payload }) {
@@ -29,7 +31,6 @@ function rootReducer (state = initialState, { type, payload }) {
             rights : payload[i].rights,
             summary : payload[i].summary,
             title : payload[i].title,
-            
           },)
         return {
           ...state,
@@ -39,7 +40,23 @@ function rootReducer (state = initialState, { type, payload }) {
       case GET_DETAILS_PODCAST:
         return {
           ...state,
-          detailPodscast : payload
+          detailPodscast : payload[0],
+          data: payload[1],
+        };
+      case GET_LIST:
+        const datosList = []
+        for(let i = 0; i < payload.length; i++)
+        datosList.push({
+            title: payload[i].children[0],
+            duration: payload[i].children[13],
+            id: payload[i].children[10],
+            pubDate: payload[i].children[12],
+            description: payload[i].children[2],
+            audio: payload[i].children[14],
+          },)
+        return {
+          ...state,
+          listChapters: datosList
         };
       case GET_DETAILS_CHAPTER:
         return {

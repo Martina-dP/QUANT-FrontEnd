@@ -44,27 +44,9 @@
 }
 
 .info{
-    display: inline;
+    background-color: white;
+    margin: 1rem 0 0 8rem;
+    box-shadow: 0 2px 6px 2px rgb(197, 196, 196);
     width: auto;
-}
-
-.title{
-    background-color: white;
-    margin: 1rem 0 0 8rem;
-    box-shadow: 0 2px 6px 2px rgb(197, 196, 196);
-    width: 100%;
-    height: 2.4rem;
-}
-
-.amount{
-    font-size: 18px;
-    padding-left: 1rem;
-    padding-top: .5rem;
-}
-
-.listado{
-    background-color: white;
-    margin: 1rem 0 0 8rem;
-    box-shadow: 0 2px 6px 2px rgb(197, 196, 196);
     /* width: 66%; */
 }

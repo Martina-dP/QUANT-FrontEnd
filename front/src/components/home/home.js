@@ -1,35 +1,34 @@
-import React from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getPodcast } from "../../actions/index"
+import React  from "react";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {getPodcast} from "../../actions/index";
 import Nav from "../nav/nav";
 import CardPodcast from "../cardHome/cardHome";
-import style from "./home.module.css"
+import style from "./home.module.css";
 
 const Home = () => {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-
-  useEffect(() =>{ 
+  useEffect(() => {
     dispatch(getPodcast());
-  },[dispatch])
+  },[dispatch]);
 
-  const datos = useSelector(state => state.podcast)
-  console.log(datos, "datos") 
+  const datos = useSelector(state => state.podcast);
 
   return (
-    <div >
-      <Nav/>
+    <div>
+      <Nav />
       <div className={style.cardPodcast}>
         {datos?.map(e => {
           return (
             <CardPodcast
-            key={e.id}
-            image={e.image.label}
-            name={e.name.label}
-            artist={e.artist.label}
+              key={e.collectionId}
+              image={e.image.label}
+              name={e.name.label}
+              artist={e.artist.label}
+              collectionId={e.collectionId}
             />
-          )
+          );
         })}
       </div>
     </div>
