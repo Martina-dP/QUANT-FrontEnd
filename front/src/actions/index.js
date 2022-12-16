@@ -1,5 +1,5 @@
 import axios from "axios";
-import XMLParser from 'react-xml-parser';
+const convert = require("xml-js");
 
 export const GET_PODCAST = "GET_PODCAST";
 export const GET_DETAILS_PODCAST = "GET_DETAILS_PODCAST";
@@ -32,12 +32,26 @@ export function getList(collectionId) {
   return async function (dispatch) {
     var json = await axios.get(`https://itunes.apple.com/lookup?id=${collectionId}&media=podcast&entity=podcastEpisode&limit=100`);
     const uno = json.data.results[1].feedUrl
+    const finalData = []
     const lista = await axios.get(`${uno}`)
-    var xml = new XMLParser().parseFromString(lista.data)
-    console.log(xml, "XML LISTA")
+    const data = JSON.parse(
+      convert.xml2json(lista.data, { compact: true, spaces: 2 })
+    );
+    console.log(data.rss.channel.item[0], "OBJETO DATA") 
+    data.rss.channel.item.forEach(element => {
+      const aux = {
+        title:  element.title["_text"] || element.title["_cdata"],
+        description: element.description["_cdata"] || element.description["_text"],
+        id: element.guid["_text"] ||  element.guid["_cdata"],
+        pubDate: element.pubDate["_text"] || element.pubDate["_cdata"],
+        audio: element.enclosure._attributes.url,
+        duration: element["itunes:duration"]["_text"] || element["itunes:duration"]["_cdata"],
+      }
+      finalData.push(aux)
+    })
     return dispatch({
       type: "GET_LIST",
-      payload: xml.children[0].children
+      payload: finalData
     });
   };
 }

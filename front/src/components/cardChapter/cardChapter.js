@@ -1,13 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import style from "./cardChapter.module.css"
 
-function CardChapter({title, guid, pubDate, itunes:duration }){
+function CardChapter({title, id, pubDate, duration }){
 
     return(
         <div className={style.all}>
-          <h2>{title}</h2>
-          <h2>{pubDate}</h2>
-          <h2>{title}</h2>
+          <Link to={`/detailChapter/${id}`} >
+            <h2 className={style.text1}>{title}</h2>
+          </Link>
+          <div>
+            <h2 className={style.text2}>{pubDate}</h2>
+            <h2 className={style.text3}>{duration}</h2>
+          </div>
         </div>
     )} 
 

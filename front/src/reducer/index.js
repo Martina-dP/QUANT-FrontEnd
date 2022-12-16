@@ -10,14 +10,14 @@ const initialState = {
   detailPodscast: {},
   detailChapter: {},
   data:{},
-  listChapters: []
+  listChapters: {}
   };
 
 function rootReducer (state = initialState, { type, payload }) {
     switch(type) {
       case GET_PODCAST :
         const datos = []
-        for(let i = 0; i < payload.length; i++)
+        for(let i = 1; i < payload.length; i++)
           datos.push({
             collectionId: payload[i].id.attributes['im:id'],
             category : payload[i].category,
@@ -44,19 +44,9 @@ function rootReducer (state = initialState, { type, payload }) {
           data: payload[1],
         };
       case GET_LIST:
-        const datosList = []
-        for(let i = 0; i < payload.length; i++)
-        datosList.push({
-            title: payload[i].children[0],
-            duration: payload[i].children[13],
-            id: payload[i].children[10],
-            pubDate: payload[i].children[12],
-            description: payload[i].children[2],
-            audio: payload[i].children[14],
-          },)
         return {
           ...state,
-          listChapters: datosList
+          listChapters: payload
         };
       case GET_DETAILS_CHAPTER:
         return {

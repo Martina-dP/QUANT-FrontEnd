@@ -5,6 +5,7 @@ import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
 import {getDetailsPodcast, getList } from "../../../actions/index";
+import CardChapter from "../../cardChapter/cardChapter";
 import style from "./podcast.module.css";
 
 const CardDetail = () => {
@@ -17,17 +18,17 @@ const CardDetail = () => {
     dispatch(getList(collectionId));
   },[dispatch]);
 
-  const detailChapter = useSelector(state => state.detailChapter);
-  console.log(detailChapter, "DETAIL CHAPTER")
-  const listCahpet = useSelector(state => state.listChapters);
-  console.log(listCahpet, "LIST CHAPTER")
-  const detail = useSelector(state => state.detailPodscast);
-  const data = useSelector(state => state.data);
-  console.log(detail, "DETAIL PODCAST ")
-  console.log(data, "DATA")
+  // const detailChapter = useSelector(state => state.detailChapter);
+  // console.log(detailChapter, "DETAIL CHAPTER")
 
-  const filter = listCahpet.filter(s => s.name === "item")
-  console.log(filter, "filter ")
+  const listChapter = useSelector(state => state.listChapters);
+  console.log(listChapter, "LIST CHAPTER")
+
+  const detail = useSelector(state => state.detailPodscast);
+  // console.log(detail, "DETAIL PODCAST ")
+
+  const data = useSelector(state => state.data);
+  // console.log(data, "DATA")
 
   return (
     <div>
@@ -50,8 +51,29 @@ const CardDetail = () => {
           <div className={style.title}>
             <h2 className={style.list}> Episodios : {detail.trackCount} </h2>
           </div>
+          <div className={style.cardChapters}>
+            <div className={style.titleChapters}>
+              <h2> Title </h2>
+              <div className={style.infoChapters}>
+                <h2 className={style.date}> Date </h2>
+                <h2 className={style.duration}> Duration </h2>
+              </div>
+            </div>
+            {listChapter.length > 1 ?
+             listChapter?.map(e => {
+              return (
+                <CardChapter
+                  key={e.id}
+                  title={e.title}
+                  pubDate={e.pubDate}
+                  duration={e.duration}
+                  id={e.id}
+                />
+              );
+            }) : <h2>no hay datos</h2>}
           </div>
         </div>
+      </div>
     </div>
   );
 };

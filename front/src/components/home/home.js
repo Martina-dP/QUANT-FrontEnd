@@ -3,6 +3,7 @@ import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getPodcast} from "../../actions/index";
 import Nav from "../nav/nav";
+import Search from "../search/search";
 import CardPodcast from "../cardHome/cardHome";
 import style from "./home.module.css";
 
@@ -18,6 +19,7 @@ const Home = () => {
   return (
     <div>
       <Nav />
+      <Search/>
       <div className={style.cardPodcast}>
         {datos?.map(e => {
           return (
