@@ -1,27 +1,43 @@
-import React  from "react";
+import React, { useState }  from "react";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getPodcast} from "../../actions/index";
 import Nav from "../nav/nav";
-import Search from "../search/search";
 import CardPodcast from "../cardHome/cardHome";
 import style from "./home.module.css";
 
 const Home = () => {
+
+  const [search, setNewSearch] = useState("");
+  
+  const datos = useSelector(state => state.podcast);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getPodcast());
   },[dispatch]);
 
-  const datos = useSelector(state => state.podcast);
+  const handleSearchChange = (e) => {
+    setNewSearch(e.target.value);
+  };
+
+  const filtered = !search
+    ? datos
+    : datos.filter((item) =>
+        item.name.label.toLowerCase().includes(search.toLowerCase())
+        ||  item.artist.label.toLowerCase().includes(search.toLowerCase())
+      );
 
   return (
     <div>
       <Nav />
-      <Search/>
+      <div className={style.all}>
+        <input className={style.input} type="text" value={search} onChange={handleSearchChange} />
+        <button className={style.btn}  type="submit"> Search </button>
+      </div>
       <div className={style.cardPodcast}>
-        {datos?.map(e => {
+        {filtered?.map(e => {
           return (
             <CardPodcast
               key={e.collectionId}

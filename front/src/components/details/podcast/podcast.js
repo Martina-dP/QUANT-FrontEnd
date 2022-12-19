@@ -18,17 +18,11 @@ const CardDetail = () => {
     dispatch(getList(collectionId));
   },[dispatch]);
 
-  // const detailChapter = useSelector(state => state.detailChapter);
-  // console.log(detailChapter, "DETAIL CHAPTER")
-
   const listChapter = useSelector(state => state.listChapters);
   console.log(listChapter, "LIST CHAPTER")
 
   const detail = useSelector(state => state.detailPodscast);
-  // console.log(detail, "DETAIL PODCAST ")
-
   const data = useSelector(state => state.data);
-  // console.log(data, "DATA")
 
   return (
     <div>
@@ -59,7 +53,7 @@ const CardDetail = () => {
                 <h2 className={style.duration}> Duration </h2>
               </div>
             </div>
-            {listChapter.length > 1 ?
+            {listChapter.length > 0 ?
              listChapter?.map(e => {
               return (
                 <CardChapter
@@ -68,6 +62,7 @@ const CardDetail = () => {
                   pubDate={e.pubDate}
                   duration={e.duration}
                   id={e.id}
+                  collectionId={e.collectionId}
                 />
               );
             }) : <h2>no hay datos</h2>}

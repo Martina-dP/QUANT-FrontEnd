@@ -31,14 +31,14 @@ export function getDetailsPodcast(collectionId) {
 export function getList(collectionId) {
   return async function (dispatch) {
     var json = await axios.get(`https://itunes.apple.com/lookup?id=${collectionId}&media=podcast&entity=podcastEpisode&limit=100`);
-    const uno = json.data.results[1].feedUrl
+    const uno = json.data.results[1].feedUrl 
     const finalData = []
     const lista = await axios.get(`${uno}`)
     const data = JSON.parse(
       convert.xml2json(lista.data, { compact: true, spaces: 2 })
     );
     console.log(data.rss.channel.item[0], "OBJETO DATA") 
-    data.rss.channel.item.forEach(element => {
+    data.rss.channel.item.forEach((element, index) => {
       const aux = {
         title:  element.title["_text"] || element.title["_cdata"],
         description: element.description["_cdata"] || element.description["_text"],
@@ -46,19 +46,20 @@ export function getList(collectionId) {
         pubDate: element.pubDate["_text"] || element.pubDate["_cdata"],
         audio: element.enclosure._attributes.url,
         duration: element["itunes:duration"]["_text"] || element["itunes:duration"]["_cdata"],
+        collectionId : ""
       }
       finalData.push(aux)
     })
     return dispatch({
       type: "GET_LIST",
-      payload: finalData
+      payload: finalData, 
     });
   };
 }
 
-export function getChapters(collectionId, episodeGuid) {
+export function getChapters(collectionId, id) {
   return async function (dispatch) {
-    var json = await axios.get(`https://itunes.apple.com/lookup?id=${collectionId}/episode/${episodeGuid}`);
+    var json = await axios.get(`https://itunes.apple.com/lookup?id=${collectionId}/episode/${id}`);
     return dispatch({
       type: "GET_DETAILS_CHAPTER",
       payload: json.data,

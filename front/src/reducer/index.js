@@ -7,10 +7,11 @@ import {
 
 const initialState = {
   podcast: [],
-  detailPodscast: {},
-  detailChapter: {},
+  detailPodscast: [],
+  allDetailPodscast: {},
   data:{},
-  listChapters: {}
+  listChapters: {},
+  allListChapters : []
   };
 
 function rootReducer (state = initialState, { type, payload }) {
@@ -44,9 +45,13 @@ function rootReducer (state = initialState, { type, payload }) {
           data: payload[1],
         };
       case GET_LIST:
+        const idPodcast = state.data.collectionId
+        const dataList = Object.assign(payload, {idPodcast})
+        // const dataList = payload.concat({idPodcast})
+        console.log(dataList, " nueva lista con id p reducer ")
         return {
           ...state,
-          listChapters: payload
+          listChapters: dataList
         };
       case GET_DETAILS_CHAPTER:
         return {

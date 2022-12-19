@@ -1,14 +1,21 @@
 import React from "react";
 import Nav from "../../nav/nav";
-import {useSelector} from "react-redux";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
-import {getChapterList} from "../../../actions/index";
+import {getChapters, getDetailsPodcast} from "../../../actions/index";
 import style from "./chapter.module.css";
 
 
 const Chapter = () => {
+
+  const dispatch = useDispatch();
+  const {id, collectionId} = useParams();
+
+  useEffect(() => {
+    dispatch(getDetailsPodcast(collectionId));
+    dispatch(getChapters(collectionId, id));
+  },[dispatch]);
 
   return (
     <div >
