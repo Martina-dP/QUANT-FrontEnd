@@ -9,7 +9,7 @@ function CardChapter({title, id, pubDate, duration, collectionId }){
           <Link to={`/detailPodcast/${collectionId}/detailChapter/${id}`} >
             <h2 className={style.text1}>{title}</h2>
           </Link>
-          <div>
+          <div className={style.data}>
             <h2 className={style.text2}>{pubDate}</h2>
             <h2 className={style.text3}>{duration}</h2>
           </div>

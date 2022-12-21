@@ -28,3 +28,9 @@ a:link, a:visited, a:active {
     font-weight: normal;
     font-size: 14px;
 }
+
+.data{
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+}

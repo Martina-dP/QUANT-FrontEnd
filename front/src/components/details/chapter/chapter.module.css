@@ -8,6 +8,12 @@
     background-color: white;
     margin: 1rem;
     box-shadow: 0 2px 6px 2px rgb(197, 196, 196);
+    cursor: pointer;
+}
+
+a:link, a:visited, a:active {
+    text-decoration:none;
+    color: black;
 }
 
 .img{
@@ -49,4 +55,31 @@
     box-shadow: 0 2px 6px 2px rgb(197, 196, 196);
     width: auto;
     /* width: 66%; */
+}
+
+.detail{
+    background-color: white;
+    box-shadow: 0 2px 6px 2px rgb(197, 196, 196);
+    margin: 1rem 0 0 8rem;
+    width: 40rem;
+    height: 26rem;
+    text-align: center;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    margin: 1rem ;
+    font-size: 20px;
+}
+
+.description{
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0 1rem 1rem 1rem;
+    text-align: start;
+}
+
+.audio{
+    margin-top: 1rem;
 }

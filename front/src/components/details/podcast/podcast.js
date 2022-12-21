@@ -18,11 +18,15 @@ const CardDetail = () => {
     dispatch(getList(collectionId));
   },[dispatch]);
 
-  const listChapter = useSelector(state => state.listChapters);
-  console.log(listChapter, "LIST CHAPTER")
-
   const detail = useSelector(state => state.detailPodscast);
   const data = useSelector(state => state.data);
+
+  const listChapter = useSelector(state => state.listChapters);
+  console.log(listChapter, " LISTA EPISODIOS ")
+
+  const formatDate = (listChapter) => {
+    return new Date(listChapter).toLocaleDateString();
+  };
 
   return (
     <div>
@@ -55,11 +59,12 @@ const CardDetail = () => {
             </div>
             {listChapter.length > 0 ?
              listChapter?.map(e => {
+              const date = formatDate(e.pubDate)
               return (
                 <CardChapter
                   key={e.id}
                   title={e.title}
-                  pubDate={e.pubDate}
+                  pubDate={date}
                   duration={e.duration}
                   id={e.id}
                   collectionId={e.collectionId}
